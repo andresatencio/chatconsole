@@ -1,9 +1,9 @@
 var soks = {},
-	io = require('socket.io').listen(80);
+	io = require('socket.io').listen(8080);
 	
 io.sockets.on('connection', function (socket) {
 
-	socket.on('identificate' , function (data) {
+	socket.once('identificate' , function (data) {
 		
 		if (! soks[data.nombre] ) {
 			soks[data.nombre] =  socket;
@@ -19,6 +19,9 @@ io.sockets.on('connection', function (socket) {
 		soks[data.nombre].emit('msg:individual', {nombre: data.nombre, msg: data.msg})
 	})
 
+	socket.on('msg:todos', function (data) {
+		io.sockets.emit('msg:todos', data)
+	})
 
 });
 
