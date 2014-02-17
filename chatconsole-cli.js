@@ -46,7 +46,6 @@ so.on('connect', function(){
 		console.log('Desconectado')
 	});
 
-	sok = so;
 
 });
 
